@@ -20,8 +20,6 @@ private:
 public:
 	static const string suits[];
 	Card();
-	Card(Card& c);
-	Card(int s,int r);
 	Card(string s, string r);
 	int getRank() const;
 	void setRank(int rank);

@@ -33,15 +33,6 @@ Card::Card() {
 	rank=0;
 }
 
-Card::Card(Card& c) {
-	suit=c.suit;
-	rank=c.rank;
-}
-
-Card::Card(int s, int r) {
-	suit=s;
-	rank=r;
-}
 
 Card::Card(string s, string r) {
 	int si=findSuit(s);
