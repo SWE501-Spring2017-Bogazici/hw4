@@ -91,10 +91,10 @@ int main()
 {
     cout << "Initializing deck." << endl; //test line
     Deck d1;
-    cout << "Enter a number, from 1 to 52. Suit ranges are as follows:\n1-13: Spades; 14-26: Clubs; 27-39: Hearts; 40-52: Diamonds;" << endl;
+    cout << "Enter a number, from 1 to 52. Suit ranges are as follows:\n1-13: Spades; 14-26: Clubs; 27-39: Hearts; 40-52: Diamonds; Default: Ace of Spades;" << endl;
     int t; cin >> t;
     Card wanted(t);
-    cout << "Wanted card initialized." << endl; //test line
+    cout << "Wanted card (" << wanted << ") initialized." << endl; //test line
     
     d1.shuffle();
     
