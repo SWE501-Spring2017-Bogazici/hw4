@@ -14,11 +14,12 @@ class Deck {
 
 private:
 	Card* cards;
+	int idxTopCard=0;
 
 public:
 	Deck();
 	void shuffle();
-	void deal(Card& playersCard, Card& computersCard);
+	Card deal();
 	void print();
 	static Deck* createShuffledDeck();
 	virtual ~Deck();

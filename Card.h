@@ -18,14 +18,17 @@ private:
 	int rank;
 
 public:
-	static const string suits[];
+
+	static const string suit_names[];
+
+
 	Card();
 	Card(string s, string r);
 	int getRank() const;
 	void setRank(int rank);
 	int getSuit() const;
 	void setSuit(int suit);
-	void operator=(Card& c);
+	Card& operator=(Card& c);
 	static Card* createRandomCard();
 	static int findSuit(string s);
 	static int findRank(string s);

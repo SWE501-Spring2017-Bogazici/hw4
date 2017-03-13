@@ -30,38 +30,12 @@ void Deck::shuffle() {
 	}
 }
 
-void Deck::deal(Card& playersCard, Card& computersCard) {
-	string input;
-	int counter=0;
-	while (true) {
-		if (counter==52) {
-			cout << endl << "No cards left" << endl;
-			break;
-		}
-		Card currentCard = cards[counter];
-
-		cout << currentCard << ",";
-		if (currentCard==playersCard) {
-			cout << " You win !!!" << endl;
-			break;
-		} else {
-			counter=counter+1;
-			if (counter==52) {
-				cout << endl << "No cards left" << endl;
-				break;
-			}
-			currentCard = cards[counter];
-			cout << currentCard << ",";
-			if (currentCard==computersCard) {
-				cout << " I win !!!" << endl;
-				break;
-			} else {
-				cout << endl;
-				counter=counter+1;
-				continue;
-			}
-		}
+Card Deck::deal() {
+	if (idxTopCard>=52) {
+		throw domain_error("no cards to deal");
 	}
+	Card topCard= cards[idxTopCard++];
+	return topCard;
 }
 
 Deck* Deck::createShuffledDeck() {

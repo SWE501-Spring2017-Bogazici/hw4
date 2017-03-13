@@ -13,6 +13,30 @@
 
 using namespace std;
 
+
+void play(Card& playersCard, Card& computersCard, Deck& deck) {
+	while (true) {
+		try {
+			Card currentCard=deck.deal();
+			cout << currentCard << ",";
+			if (currentCard==playersCard) {
+				cout << " You win !!!" << endl;
+				break;
+			} else {
+				Card currentCard=deck.deal();
+				cout << currentCard << ",";
+				if (currentCard==computersCard) {
+					cout << " I win !!!" << endl;
+					break;
+				}
+			}
+			cout << endl;
+		} catch (domain_error) {
+			cout << endl << "No cards left" << endl;
+			break;
+		}
+	}
+}
 int main() {
 	srand (time(NULL));
 
@@ -31,7 +55,7 @@ int main() {
 	Card* computersCard=Card::createRandomCard();
 	cout << "I choose " << *computersCard << ", you pick first " << endl << endl;
 
-	deck->deal(*playersCard, *computersCard);
+	play(*playersCard, *computersCard, *deck);
 
 	return 0;
 }

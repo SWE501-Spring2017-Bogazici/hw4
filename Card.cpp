@@ -10,11 +10,12 @@
 #include <time.h>
 using namespace std;
 
-const string Card::suits[]={"s","h","d","c"};
+const string Card::suit_names[]={"s","h","d","c"};
+
 
 int Card::findSuit(string x) {
 	for (int i=0;i<4;i++) {
-		if (x == Card::suits[i]) {
+		if (x == Card::suit_names[i]) {
 			return i;
 		}
 	}
@@ -33,7 +34,6 @@ Card::Card() {
 	rank=0;
 }
 
-
 Card::Card(string s, string r) {
 	int si=findSuit(s);
 	int ri=findRank(r);
@@ -41,9 +41,10 @@ Card::Card(string s, string r) {
 	rank=ri;
 }
 
-void Card::operator =(Card& c) {
+Card& Card::operator =(Card& c) {
 	suit=c.suit;
 	rank=c.rank;
+	return *this;
 }
 
 Card* Card::createRandomCard() {
@@ -89,7 +90,7 @@ ostream& operator<<(ostream& out, Card& c) {
 	}
 
 
-    cout << c.suits[suit] << rankstr;
+    cout << c.suit_names[suit] << rankstr;
     return out;
 }
 
