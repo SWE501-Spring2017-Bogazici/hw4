@@ -1,0 +1,147 @@
+//============================================================================
+// Name        : CardsGame.cpp
+// Author      : Busra Ondul
+// Version     :
+// Copyright   : 26.02.2017
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+using namespace std;
+
+string Suit[4] = { "H", "S", "C", "D" };
+string Rank[13] = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+class Deck {
+public:
+
+	Deck() {
+		int array = 0;
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 13; j++) {
+				deck[array].setRank(Rank[j]);
+				deck[array].setSuit(Suit[i]);
+				array++;
+			}
+		}
+
+	}
+
+	class Card {
+	public
+
+	:
+		Card() {
+		}
+
+		Card(string s, string r) {
+			suit = s;
+			rank = r;
+		}
+
+		void setSuit(string s) {
+			suit = s;
+		}
+
+		string getSuit() {
+			return suit;
+		}
+
+		void setRank(string r) {
+			rank = r;
+		}
+
+		string getRank() {
+			return rank;
+		}
+
+	private:
+		string suit;
+
+		string rank;
+
+	};
+
+	void shuffle() {
+		Card temp;
+
+		for (int i = 0; i < 52; i++) {
+			int val = rand() % 52;
+			temp = deck[i];
+			deck[i] = deck[val];
+			deck[val] = temp;
+		}
+
+	}
+
+
+	Card deal() {
+		int rcard = rand() % 52;
+		return deck[rcard];
+	}
+
+public:
+
+	Card deck[52];
+
+};
+
+int checkCorrectOrNot(int *turn, int array, Deck deck, string suit,
+		string rank) {
+	cout << array << ". turn suit = " << deck.deck[array].getSuit()
+			<< " , rank = " << deck.deck[array].getRank() << endl;
+	if (deck.deck[array].getSuit() == suit
+			&& deck.deck[array].getRank() == rank) {
+		cout << "game finished" << endl;
+		return 1;
+	} else {
+		if (*turn == 1) {
+			*turn = 0;
+		} else if (*turn == 0) {
+			*turn = 1;
+		}
+	}
+	return -1;
+
+}
+
+int main() {
+
+	srand((unsigned) time(NULL));
+
+	Deck deck;
+	deck.shuffle();
+
+	cout << "Select the Suit: " << endl;
+	cout << "'H' for Hearts" << endl;
+	cout << "'S' for Spades" << endl;
+	cout << "'C' for Clubs" << endl;
+	cout << "'D' for Diamonds" << endl;
+
+	string suit;
+	cin >> suit;
+
+	cout << "Select the rank" << endl;
+	cout << "A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K" << endl;
+
+	string rank;
+	cin >> rank;
+
+	int turn = 0; //0->User, 1->Computer
+	int *turnAddress = &turn;
+	for (int i = 0; i < 52; i++) {
+		if (checkCorrectOrNot(turnAddress, i, deck, suit, rank) != -1) {
+			break;
+		}
+	}
+
+	if (turn == 0) {
+		cout << "You Win: " << endl;
+	} else if (turn == 1) {
+		cout << "Computer Wins: " << endl;
+	}
+
+	cout << suit << " " << rank << endl;
+	return 0;
+}
