@@ -82,7 +82,6 @@ public:
 
 
 int main() {
-	int p = 0;
 	
 	srand(time(NULL));
 
@@ -129,10 +128,7 @@ int main() {
 		
 	}
 
-	cout << counter << endl;
-
 	cout << "Game is over" << endl;
 
-	cin >> p;
 	return 0;
 }
