@@ -1,0 +1,138 @@
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <time.h>
+
+using namespace std;
+
+string SuitsArr[4] = { "H", "S", "D", "C" };
+string RanksArr[13] = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
+
+class Card {
+private:
+	string suit;
+	string rank;
+
+public:
+	Card() {};
+
+	Card(string s, string r) {
+		suit = s;
+		rank = r;
+	}
+
+	string GetRank() {
+		return rank;
+
+	}
+
+	string GetSuit() {
+		return suit;
+
+	}
+
+	void SetRank(string r) {
+		rank = r;
+	}
+
+	void SetSuit(string s) {
+		suit = s;
+	}
+};
+
+ostream &operator<<(ostream &out, Card &card) {
+	out << card.GetRank() << " of " << card.GetSuit() << endl;
+	return out;
+
+}
+
+class Deck {
+public:
+	Card card[52];
+
+	Deck() {
+		int index = 0;
+		for (int i = 0; i < 4;i++) {
+			for (int j = 0; j < 13; j++) {
+				card[index].SetRank(RanksArr[j]);
+				card[index].SetSuit(SuitsArr[i]);
+
+				index++;
+			}
+		}
+	}
+
+	void Shuffle() {
+		for (int i = 0; i < 52; i++) {
+			int r = rand() % 52;
+			Card temp = card[i];
+			card[i] = card[r];
+			card[r] = temp;
+		}
+
+	}
+
+	Card deal() {
+		int randomCard = rand() % 52;
+		return card[randomCard];
+	}
+	
+
+};
+
+
+int main() {
+	int p = 0;
+	
+	srand(time(NULL));
+
+	Deck deck;
+	deck.Shuffle();
+
+	string suit;
+	string rank;
+
+	cout << "Enter H - Hearts, S - Spades, C - Clubs, D - Diamonds for suit and A, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K for rank with spaces between them.";
+
+	cin >> suit >> rank;
+
+	cout << "Choice: " << rank << " of " << suit << endl;
+	int counter = 1;
+	//setting allowed round to 100.
+	while(true) {
+		counter++;
+
+		Card user = deck.deal();
+		cout << "Dealed for user: " << user << endl;
+
+		if (user.GetSuit() == suit && user.GetRank() == rank)
+		{
+			cout << "User won the game!" << endl;
+			break;		
+		}
+		else
+		{
+			cout << "User guessed wrong." << endl;
+
+			Card comp = deck.deal();
+			cout << "Dealed for computer: " << comp << endl;
+			if (comp.GetSuit()==suit && comp.GetRank()==rank)
+			{
+				cout << "Computer won the game!" << endl;
+				break;
+			}
+			else
+			{
+				cout << "Computer guessed wrong" << endl;
+			}
+		}
+		
+	}
+
+	cout << counter << endl;
+
+	cout << "Game is over" << endl;
+
+	cin >> p;
+	return 0;
+}
