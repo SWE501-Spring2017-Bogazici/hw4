@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
 	cout << "You need to pick a card first to begin the game"<<endl;
 	cout << "You can write Hearts , Diamonds, Clubs or Spades"<<endl;
 	cin >> userSuite;
-	cout << "Please pick a Rank  - A, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K - "<<endl;
+	cout << "Please pick a Rank  - A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K - "<<endl;
 	cin >> userRank;
 	
 	Card userCard;
